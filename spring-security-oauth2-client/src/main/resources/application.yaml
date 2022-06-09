@@ -1,0 +1,43 @@
+server:
+  port: 8081
+  
+## Application custom settings
+custom:
+  resource-server-url: http://localhost:8082/username
+  
+## GITHUB
+#spring:
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          github:
+#            clientId: CHANGE-ME
+#            clientSecret: CHANGE-ME
+
+## KEYCLOAK
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          oauth2-client:
+            client-id: oauth2-client
+            client-name: oauth2-client
+            client-secret: CHANGE-ME
+            scope:
+            - openid
+            - profile
+            - roles
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:8081/login/oauth2/code/oauth2-client
+        provider:
+          oauth2-client:
+            issuer-uri: http://localhost:8080/realms/SpringBootKeycloak
+            user-info-uri: http://localhost:8080/realms/SpringBootKeycloak/protocol/openid-connect/userinfo
+            user-name-attribute: preferred_username
+
+## LOGGING
+#logging:
+#  level:
+#    root: DEBUG
