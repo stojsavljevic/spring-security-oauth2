@@ -3,6 +3,7 @@ package alex.spring.security.client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.web.reactive.function.client.ServletOAuth2AuthorizedClientExchangeFilterFunction;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -60,11 +61,14 @@ public class MainController {
 	}
 	
 	private String getLocalUsername(OAuth2User principal) {
-		// for Keycloak:
-		Object username = principal.getAttribute("preferred_username");
+		// Keycloak specific:
+		// Object username = principal.getAttribute("preferred_username");
 
-		// for GitHub:
+		// GitHub specific:
 		// Object username = principal.getAttribute("login");
+		
+		// Spring Security:
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		
 		return username.toString();
 	}
