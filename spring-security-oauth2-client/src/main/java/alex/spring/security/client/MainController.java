@@ -25,7 +25,6 @@ public class MainController {
 	
 	/**
 	 * This GET is for testing unprotected endpoint.
-	 * 
 	 */
 	@GetMapping("/free")
 	public String free() {
@@ -41,7 +40,6 @@ public class MainController {
 	
 	/**
 	 * This POST is for testing if CSRF is disabled.
-	 * 
 	 */
 	@PostMapping("/local-username")
 	public String localUsernamePost(@AuthenticationPrincipal OAuth2User principal) {
@@ -50,13 +48,13 @@ public class MainController {
 	}
 
 	@GetMapping("/authorization-code-username")
-	public String getAuthorizationCodeUsername(@AuthenticationPrincipal OAuth2User principal) {
+	public String getAuthorizationCodeUsername() {
 		
 		return getResourceServerUsername(AUTHORIZATION_CODE_CLIENT);
 	}
 	
 	@GetMapping("/client-credentials-username")
-	public String getClientCredentialsUsername(@AuthenticationPrincipal OAuth2User principal) {
+	public String getClientCredentialsUsername() {
 		
 		return getResourceServerUsername(CLIENT_CREDENTIALS_CLIENT);
 	}
