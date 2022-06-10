@@ -49,7 +49,7 @@ public class OAuth2Config {
 
 	@Bean
 	OAuth2AuthorizedClientManager authorizedClientManager(ClientRegistrationRepository clientRegistrationRepository,
-															OAuth2AuthorizedClientRepository authorizedClientRepository) {
+			OAuth2AuthorizedClientRepository authorizedClientRepository) {
 		OAuth2AuthorizedClientProvider authorizedClientProvider =
 				OAuth2AuthorizedClientProviderBuilder.builder()
 						.authorizationCode()
