@@ -3,6 +3,7 @@ package alex.spring.security.client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.client.web.reactive.function.client.ServletOAuth2AuthorizedClientExchangeFilterFunction;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,50 +13,69 @@ import org.springframework.web.reactive.function.client.WebClient;
 @RestController
 public class MainController {
 	
+	private static final String AUTHORIZATION_CODE_CLIENT = "oauth2-client-ac";
+	
+	private static final String CLIENT_CREDENTIALS_CLIENT = "oauth2-client-cc";
+	
 	@Value("${custom.resource-server-url}")
 	String resourceServerUrl;
 	
 	@Autowired
 	WebClient webClient;
 	
+	/**
+	 * This GET is for testing unprotected endpoint.
+	 * 
+	 */
 	@GetMapping("/free")
 	public String free() {
+		
 		return "free";
 	}
-
-	@GetMapping("/hello")
-	public String hello(@AuthenticationPrincipal OAuth2User principal) {
+	
+	@GetMapping("/local-username")
+	public String localUsernameGet(@AuthenticationPrincipal OAuth2User principal) {
 		
-		return getResponse(principal);
+		return getLocalUsername(principal);
 	}
 	
-	@PostMapping("/hello")
-	public String helloPost(@AuthenticationPrincipal OAuth2User principal) {
+	/**
+	 * This POST is for testing if CSRF is disabled.
+	 * 
+	 */
+	@PostMapping("/local-username")
+	public String localUsernamePost(@AuthenticationPrincipal OAuth2User principal) {
 		
-		return getResponse(principal);
+		return getLocalUsername(principal);
+	}
+
+	@GetMapping("/authorization-code-username")
+	public String getAuthorizationCodeUsername(@AuthenticationPrincipal OAuth2User principal) {
+		
+		return getResourceServerUsername(AUTHORIZATION_CODE_CLIENT);
 	}
 	
-	private String getResponse(OAuth2User principal) {
-		String resourceServerResponse = getResourceServerResponse();
-
+	@GetMapping("/client-credentials-username")
+	public String getClientCredentialsUsername(@AuthenticationPrincipal OAuth2User principal) {
+		
+		return getResourceServerUsername(CLIENT_CREDENTIALS_CLIENT);
+	}
+	
+	private String getLocalUsername(OAuth2User principal) {
 		// for Keycloak:
 		Object username = principal.getAttribute("preferred_username");
-		
-		// for GitHub:
-//		Object username = principal.getAttribute("login");
-		
-		return "Local username: " + username + " ::::: Resource server username: " + resourceServerResponse;
-	}
 
-	private String getResourceServerResponse() {
+		// for GitHub:
+		// Object username = principal.getAttribute("login");
+		
+		return username.toString();
+	}
+	
+	private String getResourceServerUsername(String clientId) {
 		return this.webClient
 				.get()
 				.uri(resourceServerUrl)
-				
-				// uses ServletOAuth2AuthorizedClientExchangeFilterFunction.clientRegistrationId
-				// not needed because oauth2Client.setDefaultOAuth2AuthorizedClient(true);
-//				.attributes(clientRegistrationId("oauth2-client")) 
-				
+				.attributes(ServletOAuth2AuthorizedClientExchangeFilterFunction.clientRegistrationId(clientId)) 
 				.retrieve()
 				.bodyToMono(String.class)
 				.block();

@@ -4,7 +4,7 @@
 Demonstrates Spring Security OAuth2 configuration for client and resource server.
 
 
-Uses Keycloak (or GitHub) for authentication.
+Uses Keycloak (or GitHub) for authentication. Make sure that Keycloak is properly configured (realm, client, users, roles...). Client needs to have Service Accounts Enabled for client credentials flow.
 
 
 Configured using Spring Security properties.

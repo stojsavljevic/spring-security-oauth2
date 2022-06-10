@@ -40,9 +40,10 @@ public class OAuth2Config {
 	WebClient webClient(OAuth2AuthorizedClientManager authorizedClientManager) {
 		ServletOAuth2AuthorizedClientExchangeFilterFunction oauth2Client =
 				new ServletOAuth2AuthorizedClientExchangeFilterFunction(authorizedClientManager);
-//		oauth2Client.setDefaultClientRegistrationId("oauth2-client");
-		oauth2Client.setDefaultOAuth2AuthorizedClient(true);
-		 return WebClient.builder()
+		
+		// set authorization code client as default one
+		oauth2Client.setDefaultClientRegistrationId("oauth2-client-ac");
+		return WebClient.builder()
 				.apply(oauth2Client.oauth2Configuration())
 				.build();
 	}
