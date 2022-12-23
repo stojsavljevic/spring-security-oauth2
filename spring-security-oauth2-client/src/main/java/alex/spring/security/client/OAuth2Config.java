@@ -2,6 +2,7 @@ package alex.spring.security.client;
 
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientManager;
@@ -21,13 +22,15 @@ import org.springframework.web.reactive.function.client.WebClient;
  *
  */
 @EnableWebSecurity
+@Configuration
 public class OAuth2Config {
 
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http
 			.authorizeHttpRequests(authorize -> authorize
-				.antMatchers("/error", "/free").permitAll()
+//				.antMatchers("/error", "/free").permitAll()
+				.requestMatchers("/error", "/free").permitAll()
 				.anyRequest().authenticated()
 			)
 			.oauth2Login()

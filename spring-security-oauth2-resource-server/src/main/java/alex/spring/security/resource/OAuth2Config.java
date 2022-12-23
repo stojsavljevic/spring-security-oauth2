@@ -1,6 +1,7 @@
 package alex.spring.security.resource;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
@@ -12,6 +13,7 @@ import org.springframework.security.web.SecurityFilterChain;
  *
  */
 @EnableWebSecurity
+@Configuration
 public class OAuth2Config {
 
     @Bean
