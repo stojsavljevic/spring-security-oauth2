@@ -1,4 +1,4 @@
-## Spring Boot Security OAuth2 Example Application
+## Spring Boot Security OAuth2 Example Application ![build status](https://github.com/stojsavljevic/spring-security-oauth2/actions/workflows/maven.yml/badge.svg)
 
 
 Demonstrates Spring Security 5 OAuth2 configuration for client and resource server.
