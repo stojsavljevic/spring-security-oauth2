@@ -5,16 +5,6 @@ server:
 custom:
   resource-server-url: http://localhost:8082/username
   
-## GITHUB
-#spring:
-#  security:
-#    oauth2:
-#      client:
-#        registration:
-#          github:
-#            clientId: CHANGE-ME
-#            clientSecret: CHANGE-ME
-
 ## KEYCLOAK
 spring:
   security:
