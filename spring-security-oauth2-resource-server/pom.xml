@@ -11,7 +11,7 @@
 	<parent>
         <groupId>alex.demo.spring.security</groupId>
 		<artifactId>spring-security-oauth2-demo</artifactId>
-        <version>1.0.0</version>
+        <version>1.3.0</version>
     </parent>
 
 	<dependencies>
