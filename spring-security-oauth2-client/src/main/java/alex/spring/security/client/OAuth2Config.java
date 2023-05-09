@@ -1,6 +1,8 @@
 package alex.spring.security.client;
 
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -27,15 +29,15 @@ public class OAuth2Config {
 
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http
-			.authorizeHttpRequests(authorize -> authorize
-//				.antMatchers("/error", "/free").permitAll()
-				.requestMatchers("/error", "/free").permitAll()
+
+		http.authorizeHttpRequests(
+				authorize -> authorize.requestMatchers("/error", "/free").permitAll()
 				.anyRequest().authenticated()
 			)
-			.oauth2Login()
-			.and().oauth2Client()
-			.and().csrf().disable().cors().disable();
+			.oauth2Login(withDefaults())
+			.oauth2Client(withDefaults())
+			.csrf(csrf -> csrf.disable())
+			.cors(cors -> cors.disable());
 		return http.build();
 	}
 	
@@ -59,16 +61,11 @@ public class OAuth2Config {
 				.authorizationCode()
 				.refreshToken()
 				.clientCredentials()
-				.password()
 			.build();
 		
 		DefaultOAuth2AuthorizedClientManager authorizedClientManager = new DefaultOAuth2AuthorizedClientManager(
 				clientRegistrationRepository, authorizedClientRepository);
 		authorizedClientManager.setAuthorizedClientProvider(authorizedClientProvider);
-
-		// For the `password` grant, the `username` and `password` are supplied via request parameters,
-		// so map it to `OAuth2AuthorizationContext.getAttributes()`.
-//		authorizedClientManager.setContextAttributesMapper(contextAttributesMapper());
 
 		return authorizedClientManager;
 	}
