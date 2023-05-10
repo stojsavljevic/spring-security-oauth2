@@ -1,4 +1,4 @@
-package alex.spring.security.resource;
+package com.alex.oauth2.resource;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

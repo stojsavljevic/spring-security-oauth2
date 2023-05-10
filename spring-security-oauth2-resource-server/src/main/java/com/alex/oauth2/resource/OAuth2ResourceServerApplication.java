@@ -1,12 +1,12 @@
-package alex.spring.security.client;
+package com.alex.oauth2.resource;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class OAuth2ClientApplication {
+public class OAuth2ResourceServerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(OAuth2ClientApplication.class, args);
+		SpringApplication.run(OAuth2ResourceServerApplication.class, args);
 	}
 }

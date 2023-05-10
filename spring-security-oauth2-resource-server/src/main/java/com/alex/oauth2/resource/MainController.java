@@ -1,4 +1,4 @@
-package alex.spring.security.resource;
+package com.alex.oauth2.resource;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;

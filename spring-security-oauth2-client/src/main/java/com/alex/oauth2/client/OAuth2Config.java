@@ -1,4 +1,4 @@
-package alex.spring.security.client;
+package com.alex.oauth2.client;
 
 
 import static org.springframework.security.config.Customizer.withDefaults;

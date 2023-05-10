@@ -1,4 +1,4 @@
-package alex.spring.security.client;
+package com.alex.oauth2.client;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
