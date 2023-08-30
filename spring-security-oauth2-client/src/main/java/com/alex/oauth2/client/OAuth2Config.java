@@ -15,6 +15,7 @@ import org.springframework.security.oauth2.client.web.DefaultOAuth2AuthorizedCli
 import org.springframework.security.oauth2.client.web.OAuth2AuthorizedClientRepository;
 import org.springframework.security.oauth2.client.web.reactive.function.client.ServletOAuth2AuthorizedClientExchangeFilterFunction;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.reactive.function.client.WebClient;
 
 /**
@@ -30,8 +31,8 @@ public class OAuth2Config {
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-		http.authorizeHttpRequests(
-				authorize -> authorize.requestMatchers("/error", "/free").permitAll()
+		http.authorizeHttpRequests(authorize -> authorize
+				.requestMatchers(new AntPathRequestMatcher("/error"), new AntPathRequestMatcher("/free")).permitAll()
 				.anyRequest().authenticated()
 			)
 			.oauth2Login(withDefaults())
