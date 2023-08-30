@@ -1,7 +1,7 @@
 ## Spring Boot Security OAuth2 Example Application ![build status](https://github.com/stojsavljevic/spring-security-oauth2/actions/workflows/maven.yml/badge.svg)
 
 
-Demonstrates Spring Security 5 OAuth2 configuration for client and resource server.
+Demonstrates Spring Security 6 OAuth2 configuration for client and resource server.
 
 
 Uses Keycloak (or GitHub) for authentication. Make sure that Keycloak is properly configured (realm, client, users, roles...). Client needs to have Service Accounts Enabled for client credentials flow.
