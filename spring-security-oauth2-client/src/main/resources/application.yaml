@@ -15,7 +15,7 @@ spring:
           oauth2-client-ac:
             client-id: oauth2-client
             client-name: oauth2-client-ac
-            client-secret: CHANGE-ME
+            client-secret: ohzgsYkOAjesIvzhiTdUbRuA4GlL3yGd
             scope:
             - openid
             - profile
@@ -26,7 +26,7 @@ spring:
           oauth2-client-cc:
             client-id: oauth2-client
             client-name: oauth2-client-cc
-            client-secret: CHANGE-ME
+            client-secret: ohzgsYkOAjesIvzhiTdUbRuA4GlL3yGd
             authorization-grant-type: client_credentials
         provider:
           oauth2-client-ac:

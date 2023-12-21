@@ -21,7 +21,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 /**
  * 
  * @see https://docs.spring.io/spring-security/reference/servlet/oauth2/client/authorization-grants.html
- * @see https://github.com/jgrandja/spring-security-oauth-5-2-migrate/blob/main/client-app/src/main/java/org/springframework/security/oauth/samples/config/WebClientConfig.java
  *
  */
 @EnableWebSecurity
